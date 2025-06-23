@@ -129,18 +129,44 @@ Nmap done: 1 IP address (1 host up) scanned in 189.95 seconds
 - **MITRE**: T1190 (Exploit Public-Facing Application), T1059.004 (Command and Scripting Interpreter-Unix shell)
 - **Severity**: Critical
 - **Location**: Web server (10.129.231.200:80), /upload.action;jsessionid={sessid} endpoint
-- **Description**: File upload logic in Apache Struts is flawed. An attacker can manipulate file upload params to enable paths traversal and under some circumstances this can lead to uploading a malicious file which can be used to perform Remote Code Execution.
+- **Description**: File upload logic in Apache Struts is flawed. An attacker can manipulate file upload params to enable paths traversal and under some circumstances this can lead to uploading a malicious file which can be used to perform Remote Code Execution (e.g. webshell, ... ).
 - **Evidence**: 
 ![CVE](https://github.com/user-attachments/assets/cfe8a515-631d-4227-b831-51617d769ee5)
 ![webshell](https://github.com/user-attachments/assets/0810e478-59b8-446b-b658-d3dd8d4eb92a)
 
-- **Impact**: Exposure of sensitive system information, gaining unauthorized initial access.
+- **Impact**: Exposure of sensitive system information, gaining unauthorized initial access / foothold.
 - **Recommendation**: Patch --> advised to upgrade to Apache Struts 6.4.0 or later and migrate to the new file upload mechanism. 
 
+## Post Exploitation
 
-### Finding 2: TBA
+### Finding 2 : Sudo misconfiguration
+- **MITRE**: T1548 (Abuse Elevation Control Mechanism), T1068 (Exploitation for Privilege Escalation)
+- **Severity**: Critical
+- **Location**: Web server (10.129.231.200) , User: administrator (******)
+- **Description**: misconfigured & excessive sudo permissions to escalate privileges.
+- **Evidence**:
+   ```Bash
+  sudo -l (Manual Bash /// linPEAS Scan)
+   
+  Result:
+  Matching Defaults entries for james on localhost:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
 
----
+  User james may run the following commands on localhost:
+    (ALL) NOPASSWD: /usr/sbin/tcpdump
+
+   ```
+   
+   ![privEs](https://github.com/user-attachments/assets/6d30a64b-b8ad-4c04-86e6-3dd220b5d4a1)
+ 
+- **Impact**: attacker gaining ROOT access. 
+- **Recommendation**:
+  - Restrict sudo Permissions: Specify exact tcpdump options in the sudoers file, e.g., /usr/sbin/tcpdump -ttteni eth0, to limit flexibility.
+  - Use Capabilities Instead of sudo: Grant tcpdump specific Linux capabilities (CAP_NET_RAW, CAP_NET_ADMIN) to run without root privileges.
+    (Reduce the need for sudo)
+  - Least Privilege Principle: Avoid NOPASSWD and overly broad sudo rules.
+  - Monitor & patch
+
 
 
 ## Conclusion (TBA)
@@ -152,4 +178,7 @@ The pentest successfully identified [X] vulnerabilities in the home CTF environm
 - https://github.com/TAM-K592/CVE-2024-53677-S2-067
 - https://cybersecuritynews.com/apache-struts-vulnerability/
 - https://blog.qualys.com/vulnerabilities-threat-research/2024/12/16/critical-apache-struts-file-upload-vulnerability-cve-2024-53677-risks-implications-and-enterprise-countermeasures
+- https://github.com/peass-ng/PEASS-ng/blob/master/linPEAS/README.md
+- https://craftware.xyz/deep-dive/2023/11/18/Neat-privesc.html
+- #GROK (Template/Recommendations/Knowledge)
 
