@@ -18,7 +18,7 @@
 ---
 
 ## Executive Summary
-This report details the results of a penetration test conducted on a HTB Capture The Flag (CTF) environment. The objective was to identify and exploit vulnerabilities to capture flags and assess the security of the target systems. The test revealed [X] vulnerabilities, including [e.g., 1 critical, 2 high, 3 medium] severity issues. Key findings include [e.g., misconfigured web server, weak credentials]. Immediate remediation is recommended for critical issues to secure the environment.
+This report details the results of a penetration test conducted on a HTB Capture The Flag (CTF) environment. The objective was to identify and exploit vulnerabilities to capture flags and assess the security of the target systems. 
 
 ---
 
@@ -131,7 +131,8 @@ Nmap done: 1 IP address (1 host up) scanned in 189.95 seconds
 - **Location**: Web server (10.129.231.200:80), /upload.action;jsessionid={sessid} endpoint
 - **Description**: File upload logic in Apache Struts is flawed. An attacker can manipulate file upload params to enable paths traversal and under some circumstances this can lead to uploading a malicious file which can be used to perform Remote Code Execution.
 - **Evidence**: 
-
+![CVE](https://github.com/user-attachments/assets/cfe8a515-631d-4227-b831-51617d769ee5)
+![webshell](https://github.com/user-attachments/assets/0810e478-59b8-446b-b658-d3dd8d4eb92a)
 
 - **Impact**: Exposure of sensitive system information, gaining unauthorized initial access.
 - **Recommendation**: Patch --> advised to upgrade to Apache Struts 6.4.0 or later and migrate to the new file upload mechanism. 
