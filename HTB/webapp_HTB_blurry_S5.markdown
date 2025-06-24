@@ -27,7 +27,7 @@ This report details the results of a penetration test conducted on a HTB Capture
 The goal of this pentest was to simulate real-world attacks on a home CTF setup to capture flags and identify security weaknesses.
 
 ### Scope
-- **Targets**: Linux box (10.129.3.211), web server(10.129.3.211:80) => app.blurry.htb (domain)
+- **Targets**: Linux box (10.129.3.211), web server(10.129.3.211:80) => app.blurry.htb api.blurry.htb files.blurry.htb (domains)
 - **Testing Type**: Black-box (no prior knowledge) 
 - **Constraints**: Testing conducted within a virtualized home lab; no external network access.
 
