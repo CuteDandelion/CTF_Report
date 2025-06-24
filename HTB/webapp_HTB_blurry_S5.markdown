@@ -65,7 +65,7 @@ The pentest followed a structured approach based on CTF best practices:
 - **Severity**: Critical
 - **Location**: Web server (10.129.3.211:80) , data = artifact_object.get() (get method)
 - **Description**: inherent insecurity of pickle files,attacker could create a pickle file containing arbitrary code and upload it as an artifact to a project    via the API. When a user calls the get method within the Artifact class to download and load a file into memory, the pickle file is deserialized on their     system, running any arbitrary code it contains.
-- **Evidence**: ![Evidences]([https://github.com/user-attachments/assets/029cf4b6-f424-45af-aed4-b6015a524927](https://docs.google.com/document/d/1mQaFASzfT1wpp8ShsOi6zicPCo3hMYvIM4LM394lkCs/edit?usp=sharing))
+- **Evidence**: https://docs.google.com/document/d/1mQaFASzfT1wpp8ShsOi6zicPCo3hMYvIM4LM394lkCs/edit?usp=sharing
 - **Impact**: Exposure of sensitive system information, gaining unauthorized initial access / foothold.
 - **Recommendation**: Patch --> advised to upgrade clearML python package to 1.14.x or later . 
 
