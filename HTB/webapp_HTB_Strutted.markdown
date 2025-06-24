@@ -149,10 +149,10 @@ Nmap done: 1 IP address (1 host up) scanned in 189.95 seconds
   sudo -l (Manual Bash /// linPEAS Scan)
    
   Result:
-  Matching Defaults entries for james on localhost:
+  Matching Defaults entries for admin on localhost:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
 
-  User james may run the following commands on localhost:
+  User admin may run the following commands on localhost:
     (ALL) NOPASSWD: /usr/sbin/tcpdump
 
    ```
